@@ -1,0 +1,42 @@
+﻿<Window x:Class="LayoutDesigner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LayoutDesigner" Height="450" Width="800">
+    <Grid Background="Blue">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="100">
+
+            <ItemsControl ItemsSource="{Binding DynamicProperties}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding PropertyName}" 
+                                Command="{Binding DataContext.InsertProperty, RelativeSource={RelativeSource AncestorType=Window}}"
+                                CommandParameter="{Binding PropertyName}" Margin="0,5,0,0"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+
+            <Button Content="Bold" Command="{Binding BoldButton}" Margin="0,5,0,0" HorizontalAlignment="Left" Width="50"/>
+            <Button Content="Save" Command="{Binding SaveButton}" Margin="0,5,0,0"/>
+            <Button Content="Open" Command="{Binding OpenButton}" Margin="0,5,0,0"/>
+        </StackPanel>
+
+
+        <TextBox x:Name="LeftTextField" AcceptsReturn="True" TextWrapping="Wrap"
+                 HorizontalAlignment="Left" Margin="120,10,0,0" VerticalAlignment="Top" Width="300" Height="333"
+                 Text="{Binding LayoutContent, Mode=TwoWay}" />
+
+
+        <RichTextBox x:Name="RightTextField" HorizontalAlignment="Left" Margin="430,10,0,0" 
+                     VerticalAlignment="Top" Width="300" Height="333" IsReadOnly="True">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <Button Content="Print" Click="PrintButton" 
+                HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="50" Margin="400,0,0,10" />
+    </Grid>
+</Window>
